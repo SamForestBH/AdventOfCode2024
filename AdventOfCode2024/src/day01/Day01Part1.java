@@ -31,6 +31,7 @@ public class Day01Part1 {
 			count += Math.abs(l1.get(i) - l2.get(i));
 		}
 		System.out.println(count);
+		br.close();
 	}
 
 }

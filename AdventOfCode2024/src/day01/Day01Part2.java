@@ -51,6 +51,7 @@ public class Day01Part2 {
 			}
 		}
 		System.out.println(count);
+		br.close();
 	}
 
 }
