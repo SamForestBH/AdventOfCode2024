@@ -9,11 +9,12 @@ public class Day02Part2 {
 
 	public static void main(String[] args) throws IOException {
 		//Reads line from input file
-		File input = new File("src\\day02\\input.txt");
+		File input = new File("src\\day02\\testFile.txt");
 		BufferedReader br = new BufferedReader(new FileReader(input));
 		String line;
 		int numSafeReports = 0; //Return value
 		int reportNum = 1;
+		List<Integer> safeRows = new ArrayList<Integer>();
 		//Loop through file
 		while((line = br.readLine()) != null)
 		{
@@ -80,12 +81,14 @@ public class Day02Part2 {
 			{
 				if (failedLevels == 3)
 				{
-					System.out.println(reportNum + ": " + originalReport + "->" + report);
+					//System.out.println(reportNum + ": " + originalReport + "->" + report);
 				}
 				//System.out.println("SAFE!");
+				safeRows.add(reportNum);
 				numSafeReports ++;
 			}
 		}
+		System.out.println(safeRows);
 		System.out.println(numSafeReports);
 		br.close();
 	}
