@@ -27,7 +27,7 @@ public class Day03Part2 {
 		boolean multiplying = true;
 		
 		//Pattern matches either mul(#,#) command OR a do or don't command, prioritizing don't. 
-		Pattern multPattern = Pattern.compile("(mul\\(\\d{1,3},\\d{1,3}\\))|(don't)|(do)");
+		Pattern multPattern = Pattern.compile("(mul\\(\\d{1,3},\\d{1,3}\\))|(don't\\(\\))|(do\\(\\))");
 		Matcher multMatcher = multPattern.matcher(fullInput);
 		while(multMatcher.find())
 		{
@@ -35,10 +35,10 @@ public class Day03Part2 {
 			System.out.println(command);
 			switch (command) //Either toggle multiplying on or off, or multiply (if toggled on). 
 			{
-			case "don't":
+			case "don't()":
 				multiplying = false;
 				break;
-			case "do":
+			case "do()":
 				multiplying = true;
 				break;
 			default:
