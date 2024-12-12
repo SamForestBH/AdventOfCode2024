@@ -16,7 +16,7 @@ public class Day07Part1 {
 	public static void main(String[] args) throws IOException 
 	{
 		//Reads line from input file
-		File input = new File("src\\day07\\testFile.txt");
+		File input = new File("src\\day07\\input.txt");
 		BufferedReader br = new BufferedReader(new FileReader(input));
 		String line;
 		List<List<Long>> equations = new ArrayList<List<Long>>();
@@ -25,6 +25,7 @@ public class Day07Part1 {
 			equations.add(InputParser.splitOnNonDigitToLongList(line));
 		}
 		int validEquationCount = 0;
+		long calibrationSum = 0;
 		for (List<Long> equation : equations)
 		{
 			long target = equation.get(0);
@@ -41,6 +42,7 @@ public class Day07Part1 {
 					{
 						System.out.println("Reached " + target + "!");
 						validEquationCount ++;
+						calibrationSum += target;
 						break;
 					}
 				}
@@ -48,6 +50,7 @@ public class Day07Part1 {
 				{
 					boolean considerSum = true;
 					boolean considerMult = true;
+					boolean considerConcat = true;
 					long sum = arguments.get(0) + arguments.get(1);
 					if (sum > target)
 					{
@@ -58,18 +61,26 @@ public class Day07Part1 {
 					{
 						considerMult = false;
 					}
+					long concat = Long.valueOf(arguments.get(0) + "" + arguments.get(1));
+					if (concat > target)
+					{
+						considerConcat = false;
+					}
 					arguments.remove(0);
 					arguments.remove(0);
 					List<Long> newSumArgs = new ArrayList<Long>();
 					List<Long> newMultArgs = new ArrayList<Long>();
-					if (considerSum || considerMult)
+					List<Long> newConcatArgs = new ArrayList<Long>();
+					if (considerSum || considerMult || considerConcat)
 					{
 						newSumArgs.add(sum);
 						newMultArgs.add(mult);
+						newConcatArgs.add(concat);
 						for (Long i : arguments)
 						{
 							newSumArgs.add(i);
 							newMultArgs.add(i);
+							newConcatArgs.add(i);
 						}
 					}
 					if (considerSum)
@@ -92,10 +103,20 @@ public class Day07Part1 {
 						}
 						System.out.println();
 					}
+					if (considerConcat)
+					{
+						subArguments.add(newConcatArgs);
+						System.out.print("New equation from concat: ");
+						for (long l : newConcatArgs)
+						{
+							System.out.print(l + ", ");
+						}
+						System.out.println();
+					}
 				}
 				subArguments.remove(0);
 			}
 		}
-		System.out.println(validEquationCount);
+		System.out.println(calibrationSum);
 	}
 }
