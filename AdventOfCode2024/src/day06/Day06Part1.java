@@ -12,7 +12,7 @@ public class Day06Part1 {
 	public static void main(String[] args) throws IOException 
 	{
 		//Reads line from input file
-		File input = new File("src\\day06\\input.txt");
+		File input = new File("src\\day06\\testFile.txt");
 		BufferedReader br = new BufferedReader(new FileReader(input));
 		String line;
 		StringGridWalker map = new StringGridWalker();
@@ -43,12 +43,13 @@ public class Day06Part1 {
 			i++;
 		}		
 		int stepCount = 1;
+		map.setLetterAt(8, 84, "O");
 		while (! map.letterInCurDirection().equals("Outside of Grid"))
 		{
 			System.out.println(map.curLetter()+ " at (" + map.getCurPos()[0] + ", " + map.getCurPos()[1] + ")");
 			System.out.println(map.toString());
 			System.out.println();
-			while (map.letterInCurDirection().equals("#"))
+			while (map.letterInCurDirection().equals("#") || map.letterInCurDirection().equals("O"))
 			{
 				map.turnRight();
 				System.out.println(map.getCurDirection());

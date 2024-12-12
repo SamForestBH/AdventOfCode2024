@@ -78,6 +78,17 @@ public class StringGridWalker
 		letters.set(curPos[0], oldString.substring(0, curPos[1]) + c + oldString.substring(curPos[1]+1, oldString.length()));
 	}
 	
+	public boolean setLetterAt(int row, int col, String ch)
+	{
+		if (this.letterAt(row, col).equals("Outside of Grid"))
+		{
+			return false;
+		}
+		String oldString = letters.get(row);
+		letters.set(row, oldString.substring(0, col) + ch + oldString.substring(col+1, oldString.length()));
+		return true;
+	}
+	
 	public int[] getCurPos()
 	{
 		return curPos;
@@ -410,6 +421,26 @@ public class StringGridWalker
 			return true;
 		}
 		return false;
+	}
+	
+	public String getRow(int row)
+	{
+		if (row < 0 || row >= letters.size())
+		{
+			//System.out.println(row);
+			return null;
+		}
+		return letters.get(row);
+	}
+	
+	public boolean setRow(int row, String line)
+	{
+		if (row < 0 || row  >= letters.size() || line.length() != letters.get(1).length())
+		{
+			return false;
+		}
+		letters.set(row, line);
+		return true;
 	}
 	
 	public StringGridWalker()
