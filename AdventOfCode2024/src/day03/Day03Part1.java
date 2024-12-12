@@ -6,6 +6,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+@SuppressWarnings("unused")
 
 public class Day03Part1 {
 
@@ -36,6 +37,7 @@ public class Day03Part1 {
 			count += firstNum * secondNum;
 		}
 		System.out.println(count);
+		br.close();
 	}
 
 }

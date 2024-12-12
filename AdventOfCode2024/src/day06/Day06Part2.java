@@ -11,28 +11,6 @@ import Utilities.StringGridWalker;
 
 public class Day06Part2 {
 	
-	public static class GuardWalker extends StringGridWalker
-	{
-		List<List<Boolean[]>> validDirections;
-		
-		public GuardWalker()
-		{
-			super();
-			validDirections = new ArrayList<List<Boolean[]>>();
-		}
-		
-		@Override
-		public boolean addLine(String line)
-		{
-			List<Boolean[]> nextRow = (new ArrayList<Boolean[]>());
-			for (int i = 0; i < line.length(); i ++)
-			{
-				Boolean[] toAdd = new Boolean[4];
-				nextRow.add(new Boolean({false, false, false, false}));
-			}
-			return super.addLine(line);
-		}
-	}
 	
 	public static void main(String[] args) throws IOException 
 	{
@@ -67,7 +45,8 @@ public class Day06Part2 {
 			}
 			i++;
 		}		
-		int obstacleCount = 0;
+		int stepCount = 1;
+		int infiniteCount = 0;
 		while (! map.letterInCurDirection().equals("Outside of Grid"))
 		{
 			System.out.println(map.curLetter()+ " at (" + map.getCurPos()[0] + ", " + map.getCurPos()[1] + ")");
@@ -76,20 +55,45 @@ public class Day06Part2 {
 			while (map.letterInCurDirection().equals("#"))
 			{
 				map.turnRight();
+				System.out.println(map.getCurDirection());
 			}
 			map.moveInCurDirection();
+			int oldDirection = map.getCurDirection();
+			int[] oldPosition = {map.getCurPos()[0], map.getCurPos()[1]};
+			System.out.println(oldPosition[0] + ", " + oldPosition[1]);
+			String goalFacing = map.facingString();
+			map.turnRight();
+			List<Integer[]> turnSpots = new ArrayList<Integer[]>();
+			outerloop:
+			while (! map.letterInCurDirection().equals("Outside of Grid"))
+			{
+				String letterToTest = map.curLetter();
+				while (map.letterInCurDirection().equals("#"))
+				{
+					map.turnRight();
+				}
+				if (letterToTest.equals(goalFacing))
+				{
+					infiniteCount++;
+					turnSpots.add(map.getCurPos());
+					break outerloop;
+				}
+				map.moveInCurDirection();
+			}
+			System.out.println(map.getCurPos()[0] + ", " + map.getCurPos()[1]);
+			System.out.println(oldPosition[0] + ", " + oldPosition[1]);
+			map.setCurPos(oldPosition);
+			System.out.println(map.getCurPos()[0] + ", " + map.getCurPos()[1]);
+			map.setDirection(oldDirection);
 			if (map.curLetter().equals("."))
 			{
 				map.setCurLetter(map.facingString());
-			}
-			else
-			{
-				System.out.println("MAP HERE");
-				obstacleCount ++;
+				stepCount ++;
 			}
 				
 		}
-		System.out.println(obstacleCount);
+		System.out.println(stepCount);
+		System.out.println(infiniteCount);
 		br.close();
 	}
 }

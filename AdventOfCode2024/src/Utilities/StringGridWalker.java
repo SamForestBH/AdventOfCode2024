@@ -83,6 +83,11 @@ public class StringGridWalker
 		return curPos;
 	}
 	
+	public void setCurPos(int[] cp)
+	{
+		this.setCurPos(cp[0], cp[1]);
+	}
+	
 	public void setCurPos(int row, int col)
 	{
 		curPos[0] = row;

@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@SuppressWarnings("unused")
+
 public class Day03Part2 {
 
 	public static void main(String[] args) throws IOException {
@@ -54,7 +56,7 @@ public class Day03Part2 {
 			}
 		}
 		System.out.println(count);
-		
+		br.close();
 		
 	}
 

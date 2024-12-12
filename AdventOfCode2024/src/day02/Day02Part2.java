@@ -4,6 +4,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+@SuppressWarnings("unused")
 
 public class Day02Part2 {
 
