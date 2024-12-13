@@ -17,9 +17,10 @@ public class Day09Part2 {
 	public static void main(String[] args) throws IOException 
 	{
 		//Reads line from input file
-		File input = new File("src\\day09\\testFile.txt");
+		File input = new File("src\\day09\\input.txt");
 		BufferedReader br = new BufferedReader(new FileReader(input));
 		String diskMap = br.readLine();
+		String unchangedDiskMap = diskMap + "";
 		long checkSum = 0;
 		int diskGapIndex = 1;
 		int diskBackIndex = diskMap.length() - 1;
@@ -34,7 +35,6 @@ public class Day09Part2 {
 		{
 			diskBackIndex -= 1;
 		}
-		int fileSystemFrontIndex = 0;
 		long fileSystemBackIndex = fileSystemTotalSpace;
 		//Each loop handles the next file and the next chunk of empty space
 		//diskFrontIndex increments by 2 each time
@@ -43,18 +43,28 @@ public class Day09Part2 {
 		while (diskBackIndex >= 0)
 		{
 			diskGapIndex = 1;
+			long fileSystemFrontIndex = Character.getNumericValue(unchangedDiskMap.charAt(0))
+					+ Character.getNumericValue(unchangedDiskMap.charAt(1))
+					- Character.getNumericValue(diskMap.charAt(1));
 			int backFileSize = Character.getNumericValue(diskMap.charAt(diskBackIndex));
 			int currentGapSize = Character.getNumericValue(diskMap.charAt(diskGapIndex));
 			System.out.println("Attempting to home file of size " + backFileSize + " with ID " + (diskBackIndex/2));
-			while (currentGapSize <= backFileSize && diskGapIndex < diskBackIndex)
+			System.out.print("Checking gaps: " + fileSystemFrontIndex + ", ");
+			while (currentGapSize < backFileSize && diskGapIndex < diskBackIndex)
 			{
+				fileSystemFrontIndex += Character.getNumericValue(diskMap.charAt(diskGapIndex)) 
+						+ Character.getNumericValue(unchangedDiskMap.charAt(diskGapIndex + 1))
+						+ Character.getNumericValue(unchangedDiskMap.charAt(diskGapIndex + 2))
+						- Character.getNumericValue(diskMap.charAt(diskGapIndex + 2));
+				System.out.print(fileSystemFrontIndex + ", ");
 				diskGapIndex += 2;
 				currentGapSize = Character.getNumericValue(diskMap.charAt(diskGapIndex));
 			}
+			System.out.println();
 			long initialID;
 			if (diskGapIndex > diskBackIndex)
 			{
-				initialID = fileSystemBackIndex - backFileSize + 1;
+				initialID = fileSystemBackIndex - backFileSize;
 				System.out.println("No home found; start index is unchanged value of " + initialID);
 			}
 			else
@@ -70,7 +80,7 @@ public class Day09Part2 {
 			}
 			if (diskBackIndex != 0)
 			{
-				fileSystemBackIndex -= (backFileSize + Character.getNumericValue(diskMap.charAt(diskBackIndex - 1)));
+				fileSystemBackIndex -= (backFileSize + Character.getNumericValue(unchangedDiskMap.charAt(diskBackIndex - 1)));
 			}
 			diskBackIndex -= 2;
 		}
