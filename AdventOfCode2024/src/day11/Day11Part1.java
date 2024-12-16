@@ -162,3 +162,4 @@ public class Day11Part1 {
 		}
 	}
 }
+

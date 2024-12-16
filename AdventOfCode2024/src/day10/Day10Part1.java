@@ -17,9 +17,9 @@ public class Day10Part1 {
 	
 	public static void resetBoolean()
 	{
-		for (int i = 0; i < topoMap.getnumRows(); i++)
+		for (int i = 0; i < topoMap.getNumRows(); i++)
 		{
-			for (int j = 0; j < topoMap.getnumCols(); j++)
+			for (int j = 0; j < topoMap.getNumCols(); j++)
 			{
 				nineReached[i][j] = false;
 			}
@@ -59,11 +59,11 @@ public class Day10Part1 {
 			topoMap.addLine(line);
 		}
 		br.close();
-		nineReached = new boolean[topoMap.getnumRows()][topoMap.getnumCols()];
+		nineReached = new boolean[topoMap.getNumRows()][topoMap.getNumCols()];
 		long hikeCount = 0;
-		for (int startRow = 0; startRow < topoMap.getnumRows(); startRow++)
+		for (int startRow = 0; startRow < topoMap.getNumRows(); startRow++)
 		{
-			for (int startCol = 0; startCol < topoMap.getnumCols(); startCol ++)
+			for (int startCol = 0; startCol < topoMap.getNumCols(); startCol ++)
 			{
 				int toAdd = countPaths(startRow, startCol, 0);
 				if (toAdd != 0)

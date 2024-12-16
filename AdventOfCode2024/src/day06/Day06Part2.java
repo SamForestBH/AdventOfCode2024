@@ -59,10 +59,10 @@ public class Day06Part2 {
 			i++;
 		}	
 		int infiniteCount = 0;
-		for (int obstacleRow = 0; obstacleRow < map.getnumRows(); obstacleRow++)
+		for (int obstacleRow = 0; obstacleRow < map.getNumRows(); obstacleRow++)
 		{
 			//System.out.println("Starting Row: " + obstacleRow);
-			for (int obstacleCol = 0; obstacleCol < map.getnumCols(); obstacleCol++)
+			for (int obstacleCol = 0; obstacleCol < map.getNumCols(); obstacleCol++)
 			{
 				System.out.println("Obstacle placed at: (" + obstacleRow + ", " + obstacleCol + ")");
 				if (map.letterAt(obstacleRow, obstacleCol).equals("."))
@@ -94,7 +94,7 @@ public class Day06Part2 {
 							map.setCurLetter(map.facingString());
 						}
 					}
-					for (int r = 0; r < map.getnumRows(); r++)
+					for (int r = 0; r < map.getNumRows(); r++)
 					{
 						map.setRow(r, basicMap.getRow(r));
 						map.setCurPos(startPos);

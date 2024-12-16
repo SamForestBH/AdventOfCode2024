@@ -452,14 +452,23 @@ public class StringGridWalker
 		curDirection = RIGHT; 
 	}
 	
-	public int getnumRows()
+	public int getNumRows()
 	{
 		return letters.size();
 	}
 	
-	public int getnumCols()
+	public int getNumCols()
 	{
 		return letters.get(0).length();
+	}
+	
+	public boolean isInsideGrid(int row, int col)
+	{
+		if (this.letterAt(row, col).equals("Outside of Grid"))
+		{
+			return false;
+		}
+		return true;
 	}
 	
 	@Override
