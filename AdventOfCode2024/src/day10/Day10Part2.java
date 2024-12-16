@@ -10,7 +10,7 @@ import java.util.List;
 import Utilities.InputParser;
 import Utilities.StringGridWalker;
 
-public class Day10Part1 {
+public class Day10Part2 {
 	
 	static StringGridWalker topoMap = new StringGridWalker();
 	static boolean[][] nineReached;
@@ -31,14 +31,13 @@ public class Day10Part1 {
 	{
 		
 		if (topoMap.letterAt(locx, locy).equals("Outside of Grid") 
-				|| Integer.valueOf(topoMap.letterAt(locx, locy)) != height
-				|| (height == 9 && nineReached[locx][locy] == true))
+				|| Integer.valueOf(topoMap.letterAt(locx, locy)) != height) //|| (height == 9 && nineReached[locx][locy] == true))
 		{
 			return 0;
 		}
 		if (height == 9)
 		{
-			nineReached[locx][locy] = true;
+			//nineReached[locx][locy] = true;
 			return 1;
 		}
 		//System.out.println("Currently at (" + locx + ", " + locy + ") at height " + height);
@@ -71,7 +70,7 @@ public class Day10Part1 {
 					System.out.println("Path beginning at (" + startRow + ", " + startCol + ") has length " + toAdd);
 				}
 				hikeCount += toAdd;
-				resetBoolean();
+				//resetBoolean();
 			}
 		}
 		System.out.println(hikeCount);
