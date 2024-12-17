@@ -22,6 +22,36 @@ public class StringGridWalker
 	final public static int DOWN = 6;
 	final public static int DOWNRIGHT = 7;
 	
+	public static int[] vectorInDirection(int direction)
+	{
+		switch (direction)
+		{
+		case RIGHT:
+			return new int[] {0, 1};
+		case UPRIGHT:
+			return new int[] {-1, 1};
+		case UP:
+			return new int[] {-1, 0};
+		case UPLEFT:
+			return new int[] {-1, -1};
+		case LEFT:
+			return new int[] {0, -1};
+		case DOWNLEFT:
+			return new int[] {1, -1};
+		case DOWN: 
+			return new int[] {1, 0};
+		case DOWNRIGHT: 
+			return new int[] {1, 1};
+		default:
+			return null;
+		}
+	}
+	
+	public int[] vectorInCurrentDirection()
+	{
+		return StringGridWalker.vectorInDirection(curDirection);
+	}
+	
 	public String facingString()
 	{
 		switch (curDirection)
@@ -44,6 +74,40 @@ public class StringGridWalker
 			return "J";
 		}
 		return "X";
+	}
+	
+	public static int directionFromFacing(String s)
+	{
+		if (s.length() != 1)
+		{
+			return -1;
+		}
+		return directionFromFacing(s.charAt(0));
+	}
+	
+	public static int directionFromFacing(char c)
+	{
+		switch (c)
+		{
+		case '>':
+			return RIGHT;
+		case '<':
+			return LEFT;
+		case '^':
+			return UP;
+		case 'v':
+			return DOWN;
+		case 'F':
+			return UPLEFT;
+		case '7':
+			return UPRIGHT;
+		case 'L':
+			return DOWNLEFT;
+		case 'J':
+			return DOWNRIGHT;
+		default:
+			return -1;
+		}
 	}
 	
 	public String letterAt(int i, int j)
@@ -285,6 +349,28 @@ public class StringGridWalker
 			return toReturn;
 		}
 		return "Outside of Grid";
+	}
+	
+	public String letterInDirectionAtDistance(int direction, int distance)
+	{
+		int[] offsetVector = StringGridWalker.vectorInDirection(direction);
+		return this.letterAt(curPos[0] + offsetVector[0] * distance, curPos[1] + offsetVector[1] * distance);
+	}
+	
+	public String letterInCurrentDirectionAtDistance(int distance)
+	{
+		return this.letterInDirectionAtDistance(this.curDirection, distance);
+	}
+	
+	public boolean setLetterInDirectionAtDistance(int direction, int distance, String s)
+	{
+		return this.setLetterAt(curPos[0] + distance * StringGridWalker.vectorInDirection(direction)[0], 
+				curPos[1] + distance * StringGridWalker.vectorInDirection(direction)[1], s);
+	}
+	
+	public boolean setLetterInCurrentDirectionAtDistance(int distance, String s)
+	{
+		return this.setLetterInDirectionAtDistance(curDirection, distance, s);
 	}
 	
 	public boolean moveLeft()
