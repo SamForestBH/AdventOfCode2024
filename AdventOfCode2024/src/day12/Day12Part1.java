@@ -13,7 +13,7 @@ import Utilities.StringGridWalker;
 public class Day12Part1 {
 	
 	public static StringGridWalker garden;
-	public static boolean[][] inRegion = new boolean[garden.getNumRows()][garden.getNumCols()];
+	public static boolean[][] inRegion;
 	
 	public static class Plot
 	{
@@ -23,6 +23,7 @@ public class Day12Part1 {
 		
 		public Plot(int r, int c, String pT)
 		{
+			location = new int[2];
 			location[0] = r;
 			location[1] = c;
 			plantType = pT;
@@ -101,7 +102,7 @@ public class Day12Part1 {
 		
 		public void addPlotAndSpread(int row, int col)
 		{
-			if (garden.letterAt(row, col).equals(plantType))
+			if (garden.letterAt(row, col).equals(plantType) && ! inRegion[row][col])
 			{
 				plots.add(new Plot(row, col, plantType));
 				inRegion[row][col] = true;
@@ -126,17 +127,21 @@ public class Day12Part1 {
 	
 	public static void main(String[] args) throws IOException 
 	{
+		System.out.println("AOK");
 		//Reads line from input file
-		File input = new File("src\\day12\\testFile.txt");
+		File input = new File("src\\day12\\input.txt");
 		BufferedReader br = new BufferedReader(new FileReader(input));
 		String line;
+		garden = new StringGridWalker();
 		while ((line = br.readLine()) != null)
 		{
 			garden.addLine(line);
-		}		                                   
+		}
+		inRegion = new boolean[garden.getNumRows()][garden.getNumCols()];
 		br.close();
 		List<Region> regions = new ArrayList<Region>();
 		int totalCost = 0;
+		
 		for (int row = 0; row < garden.getNumRows(); row++)
 		{
 			for (int col = 0; col < garden.getNumCols(); col++)
