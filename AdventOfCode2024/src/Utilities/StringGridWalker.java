@@ -52,6 +52,21 @@ public class StringGridWalker
 		return StringGridWalker.vectorInDirection(curDirection);
 	}
 	
+	public static int directionToRight(int direction)
+	{
+		return (direction + 6) % 8;
+	}
+	
+	public static int directionToLeft(int direction)
+	{
+		return (direction + 2) % 8;
+	}
+	
+	public static int directionBehind(int direction)
+	{
+		return (direction + 4) % 8;
+	}
+	
 	public String facingString()
 	{
 		switch (curDirection)
