@@ -18,7 +18,7 @@ public class Day15Part1 {
 	public static void main(String[] args) throws IOException 
 	{
 		//Reads line from input file
-		File input = new File("src\\day15\\input.txt");
+		File input = new File("src\\day15\\testFile.txt");
 		BufferedReader br = new BufferedReader(new FileReader(input));
 		String line;
 		StringGridWalker map = new StringGridWalker();
