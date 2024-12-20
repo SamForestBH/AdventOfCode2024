@@ -13,13 +13,14 @@ import java.util.regex.Pattern;
 import Utilities.InputParser;
 import Utilities.StringGridWalker;
 
-public class Day17Part1 {
+public class Day17Part2 {
 	
 	static int pnt;
+	static long finalA;
 	static long A;
 	static long B;
 	static long C;
-	static String out;
+	static long out;
 	
 	public static long combo(int op)
 	{
@@ -74,7 +75,7 @@ public class Day17Part1 {
 	
 	public static void out(int op)
 	{
-		out = out + (combo(op) & 7) + ",";
+		//out = out + (combo(op) & 7) + ",";
 	}
 	
 	public static void bdv(int op)
@@ -125,23 +126,24 @@ public class Day17Part1 {
 		BufferedReader br = new BufferedReader(new FileReader(input));
 		String line;
 		line = br.readLine();
-		A = Long.valueOf(line.substring(12));
 		line = br.readLine();
-		B = Long.valueOf(line.substring(12));
 		line = br.readLine();
-		C = Long.valueOf(line.substring(12));
 		line = br.readLine();
 		line = br.readLine();
 		List<Integer> program = InputParser.splitOnNonDigitToIntList(line.substring(9));
-		out = "";
-		pnt = 0;
+		pnt = program.size() - 1;
 		
-		while (pnt < program.size())
+		while (pnt >= 0)
 		{
-			fun(program.get(pnt), program.get(pnt + 1));
-			pnt += 2;
+			out = program.get(pnt);
+			long minB = 8;
+			for (int i = 0; i < 8; i++)
+			{
+				A = 
+			}
+			A = (A << 3) + minB;
+			pnt --;
 		}
-		out = out.substring(0, out.length() - 1);
-		System.out.println(out);
+		System.out.println(A);
 	}
 }
